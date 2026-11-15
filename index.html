@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#7047c8">
+<title>The 11th Cranial Nerve Challenge</title>
+<style>
+:root{--ink:#30204f;--purple:#7047c8;--pink:#ff70ad;--blue:#55b9dc;--mint:#65c9aa;--yellow:#ffd66e}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;padding:22px;font-family:ui-rounded,"Trebuchet MS",system-ui,sans-serif;color:var(--ink);
+background-color:#f7f0ff;
+background-image:
+ radial-gradient(circle at 10% 12%,#ffe1ee 0 8%,transparent 8.3%),
+ radial-gradient(circle at 90% 16%,#fff0b8 0 7%,transparent 7.3%),
+ radial-gradient(circle at 12% 88%,#d9f7ed 0 9%,transparent 9.3%),
+ radial-gradient(circle at 88% 86%,#dcefff 0 8%,transparent 8.3%),
+ linear-gradient(135deg,#fbf2ff,#edf8ff 55%,#fff7e5)}
+.doodles{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0;color:#8c70c8;opacity:.27;font-size:clamp(22px,4vw,42px)}
+.doodles span{position:absolute;animation:drift 7s ease-in-out infinite}
+.doodles span:nth-child(1){top:5%;left:4%}.doodles span:nth-child(2){top:22%;right:4%;animation-delay:1s}
+.doodles span:nth-child(3){bottom:7%;left:5%;animation-delay:2s}.doodles span:nth-child(4){bottom:19%;right:5%;animation-delay:3s}
+.doodles span:nth-child(5){top:48%;left:2%;animation-delay:1.5s}.doodles span:nth-child(6){top:55%;right:2%;animation-delay:2.5s}
+.doodles span:nth-child(7){top:4%;right:30%;animation-delay:.5s}.doodles span:nth-child(8){bottom:3%;right:35%;animation-delay:3.5s}
+@keyframes drift{50%{transform:translateY(-12px) rotate(9deg)}}
+main{position:relative;z-index:1;width:min(100%,590px);background:#ffffffed;border:2px solid white;border-radius:30px;padding:clamp(23px,6vw,42px);text-align:center;box-shadow:0 18px 55px #6243a326}
+.tag{display:inline-block;padding:7px 13px;border-radius:99px;background:#f1e8ff;color:#6940bd;font-size:.78rem;font-weight:850;letter-spacing:.07em;text-transform:uppercase}
+h1{font-size:clamp(1.8rem,6vw,2.55rem);line-height:1.12;margin:17px 0 13px}
+.question{font-size:1.1rem;line-height:1.65;margin:0 auto 20px;max-width:470px}
+.brain{font-size:2.1rem;margin:8px}
+.hint{color:#786a91;font-size:.92rem;margin:0 0 15px}
+.choices{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.choice{border:2px solid #eee4ff;background:linear-gradient(145deg,#fff,#f8f2ff);border-radius:18px;min-height:76px;font-size:2rem;cursor:pointer;transition:transform .18s,border-color .18s,box-shadow .18s;box-shadow:0 5px 0 #e9def9}
+.choice:hover,.choice:focus-visible{transform:translateY(-4px);border-color:#b99af5;box-shadow:0 8px 0 #e9def9;outline:none}
+.choice:active{transform:translateY(1px);box-shadow:0 2px 0 #e9def9}
+.feedback{min-height:26px;margin:15px 0 0;font-weight:800;color:#8a52c8}
+.hidden{display:none!important}
+.reveal{animation:pop .55s cubic-bezier(.2,.9,.3,1.2) both}
+@keyframes pop{from{opacity:0;transform:scale(.88) translateY(12px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.wrong-card{margin:18px auto 0;padding:14px;background:linear-gradient(135deg,#fff0f7,#f2edff);border:2px dashed #e0b8f5;border-radius:22px;max-width:390px}
+.wrong-card img{display:block;width:100%;max-height:310px;object-fit:contain;border-radius:14px;background:#fff}
+.wrong-caption{font-weight:850;margin:12px 0 2px;color:#7945b7}
+.message{background:linear-gradient(135deg,#fff0f7,#f0eaff);border:2px dashed #d7b8ff;padding:23px 18px;border-radius:22px;margin-top:20px}
+.message p{font-size:clamp(1.12rem,4vw,1.35rem);line-height:1.55;font-weight:800;margin:0}
+.celebrate{font-size:2.2rem;margin-bottom:12px}
+.again{border:0;background:var(--purple);color:white;font-weight:850;padding:12px 20px;border-radius:99px;cursor:pointer;margin-top:18px;font-size:1rem}
+footer{margin-top:23px;color:#9b8eae;font-size:.78rem}
+.confetti{position:fixed;top:-15px;width:10px;height:15px;z-index:5;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(760deg);opacity:.9}}
+@media(max-width:380px){.choices{gap:9px}.choice{min-height:66px;font-size:1.8rem}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="doodles" aria-hidden="true">
+<span>🧠</span><span>🩺</span><span>🦴</span><span>🫀</span><span>🧬</span><span>💪</span><span>🩻</span><span>✨</span>
+</div>
+<main>
+  <div id="quiz">
+    <span class="tag">A little cranial nerve challenge</span>
+    <div class="brain">🧠✨</div>
+    <h1>Can you guess my role?</h1>
+    <p class="question">I'm the 11th cranial nerve, helping you move with ease. But what exactly is my role? Can you guess what I do?</p>
+    <p class="hint">Choose the emoji that gives you the best clue 👇</p>
+    <div class="choices" aria-label="Answer choices">
+      <button class="choice" type="button" aria-label="Kneeling">🧎</button>
+      <button class="choice" type="button" aria-label="Walking">🚶</button>
+      <button class="choice" type="button" aria-label="Dancing">💃</button>
+      <button class="choice" type="button" aria-label="Raising a hand">🙋</button>
+      <button class="choice" type="button" aria-label="Shrugging">🤷</button>
+      <button class="choice" type="button" aria-label="Finger heart">🫰</button>
+      <button class="choice" type="button" aria-label="Climbing">🧗</button>
+      <button class="choice" type="button" aria-label="Weightlifting">🏋️</button>
+    </div>
+    <p class="feedback" id="feedback" role="status" aria-live="polite"></p>
+    <section id="wrong" class="wrong-card hidden" aria-live="polite">
+      <img id="meme" src="memes/meme1.jpg" alt="Funny reaction meme">
+      <p class="wrong-caption" id="wrongCaption">Not quite! Give it another try 😂</p>
+      <button class="again" id="tryAgain" type="button">Try again ↻</button>
+    </section>
+  </div>
+  <section id="success" class="hidden">
+    <div class="celebrate">🎉💜🎉</div>
+    <span class="tag">Correct answer!</span>
+    <h1>You got it! 🤷</h1>
+    <div class="message reveal">
+      <p>Perform the 11th Cranial Nerve Examination on Mr. John using your phone. (AKA hover your phone on his muscles) 📱🩺</p>
+    </div>
+    <button class="again" id="playAgain" type="button">Play again ↻</button>
+  </section>
+  <footer>Made with a little science and a lot of sparkle ✨</footer>
+</main>
+<script>
+const quiz=document.getElementById('quiz'),success=document.getElementById('success');
+const wrong=document.getElementById('wrong'),meme=document.getElementById('meme');
+const feedback=document.getElementById('feedback');
+const memes=['memes/meme1.jpg','memes/meme2.jpg','memes/meme3.jpg'];
+const captions=['Not quite… that was a bold guess 😭','The nerve to choose that answer! 💀','Hmm… let’s examine that thought again 😂'];
+let wrongCount=0;
+function confettiBurst(){
+  const colors=['#ff70ad','#ffd66e','#65c9aa','#7f65df','#55b9dc'];
+  for(let i=0;i<90;i++){
+    const bit=document.createElement('i');bit.className='confetti';
+    bit.style.left=Math.random()*100+'vw';bit.style.backgroundColor=colors[i%colors.length];
+    bit.style.borderRadius=Math.random()>.5?'50%':'2px';
+    bit.style.animationDuration=(2.2+Math.random()*2.2)+'s';
+    bit.style.animationDelay=(Math.random()*.45)+'s';
+    document.body.appendChild(bit);setTimeout(()=>bit.remove(),5000);
+  }
+}
+function retry(){
+  wrong.classList.add('hidden');feedback.textContent='';
+}
+document.querySelectorAll('.choice').forEach(button=>{
+  button.addEventListener('click',()=>{
+    if(button.getAttribute('aria-label')==='Shrugging'){
+      quiz.classList.add('hidden');success.classList.remove('hidden');success.classList.add('reveal');confettiBurst();
+    }else{
+      const index=wrongCount%memes.length;wrongCount++;
+      meme.src=memes[index];meme.alt='Funny reaction meme '+(index+1);
+      document.getElementById('wrongCaption').textContent=captions[index];
+      wrong.classList.remove('hidden');wrong.classList.remove('reveal');void wrong.offsetWidth;wrong.classList.add('reveal');
+      feedback.textContent='';
+    }
+  });
+});
+document.getElementById('tryAgain').addEventListener('click',retry);
+document.getElementById('playAgain').addEventListener('click',()=>{
+  success.classList.add('hidden');success.classList.remove('reveal');quiz.classList.remove('hidden');
+  wrongCount=0;retry();
+});
+</script>
+</body>
+</html>
